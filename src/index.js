@@ -10,8 +10,8 @@ const listRef = document.querySelector('#list')
 const inputRef = document.querySelector('.input-text')
 
 inputRef.addEventListener('input', debounce(getCountries, 500))
-function getCountries(e) {
-  let getCountries = e.target.value.toLowerCase().trim()
+function getCountries(evt) {
+  let getCountries = evt.target.value.toLowerCase().trim()
   if (!getCountries.length) return
   fetchCountry(getCountries)
     .then(data => {
@@ -26,7 +26,7 @@ function getCountries(e) {
       }
 
       if (data.status == 404) error({ text: 'Not found.' })
-      if (data.length > 10) error({ text: 'Too many matches found.Please enter a more specific query!' })
+      if (data.length > 10) error({ text: 'Too many matches found!' })
     })
     .catch(err => {
       console.error('Error: ', err)
